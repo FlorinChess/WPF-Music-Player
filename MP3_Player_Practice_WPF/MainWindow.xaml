@@ -136,11 +136,10 @@
 
                 <StackPanel Grid.Column="0" Orientation="Vertical" HorizontalAlignment="Left" Margin="10,0,0,0">
                     <TextBlock TextTrimming="CharacterEllipsis" Padding="2" FontSize="22" Foreground="WhiteSmoke" Text="{Binding SelectedSong.Name}"/>
-                    <TextBlock TextTrimming="CharacterEllipsis"  Padding="2" FontSize="16" Foreground="Gray" Text="{Binding SelectedSong.Artist}"/>
+                    <TextBlock TextTrimming="CharacterEllipsis" Padding="2" FontSize="16" Foreground="Gray" Text="{Binding SelectedSong.Artist}"/>
                 </StackPanel>
 
-                <StackPanel x:Name="MusicPlayerButtons"
-                        Grid.Row="2" Grid.Column="1" Margin="0" Orientation="Horizontal"
+                <StackPanel x:Name="MusicPlayerButtons" Grid.Row="2" Grid.Column="1" Margin="0" Orientation="Horizontal"
                         HorizontalAlignment="Center" VerticalAlignment="Center">
                     <Button x:Name="ReplayButton" ToolTip="Replay" Command="{Binding ReplayCommand}"                        
                         Content="Replay" Foreground="WhiteSmoke"
@@ -149,22 +148,23 @@
                         Command ="{Binding PreviousSongCommand}"
                         Style="{StaticResource MusicPlayerButton}">
                         <StackPanel>
-                            <Image Source="C:\Users\Dell\Pictures\previous.png" Style="{StaticResource MusicPlayerButtonImage}"/>
+                            <Image Source="pack://application:,,,/Icons/previous.png" Style="{StaticResource MusicPlayerButtonImage}"/>
                         </StackPanel>
                     </Button>
                     <Button x:Name="PlayPauseButton" ToolTip="Play/Pause" 
                         Command="{Binding PlayPauseCommand}"
                         Style="{StaticResource MusicPlayerButton}">
                         <StackPanel>
-                            <Image Source="C:\Users\Dell\Pictures\pause-play.png" Style="{StaticResource MusicPlayerButtonImage}"/>
+                            <Image Source="pack://application:,,,/Icons/pause-play.png" Style="{StaticResource MusicPlayerButtonImage}"/>
                         </StackPanel>
                     </Button>
-
                     <Button x:Name="NextSongButton" ToolTip="Next"
                         Command="{Binding NextSongCommand}"
                         Style="{StaticResource MusicPlayerButton}">
                         <StackPanel>
-                            <Image Source="C:\Users\Dell\Pictures\next.png" Style="{StaticResource MusicPlayerButtonImage}"/>
+                            <Image Source="pack://application:,,,/Icons/next.png" Style="{StaticResource MusicPlayerButtonImage}">
+                                
+                            </Image>
                         </StackPanel>
                     </Button>
                     <Button x:Name="StopButton" ToolTip="Stop"
