@@ -148,23 +148,21 @@
                         Command ="{Binding PreviousSongCommand}"
                         Style="{StaticResource MusicPlayerButton}">
                         <StackPanel>
-                            <Image Source="pack://application:,,,/Icons/previous.png" Style="{StaticResource MusicPlayerButtonImage}"/>
+                            <Image Source="/Icons/previous.png" Style="{StaticResource MusicPlayerButtonImage}" Cursor="Hand"/>
                         </StackPanel>
                     </Button>
                     <Button x:Name="PlayPauseButton" ToolTip="Play/Pause" 
                         Command="{Binding PlayPauseCommand}"
                         Style="{StaticResource MusicPlayerButton}">
                         <StackPanel>
-                            <Image Source="pack://application:,,,/Icons/pause-play.png" Style="{StaticResource MusicPlayerButtonImage}"/>
+                            <Image Source="/Icons/pause-play.png" Style="{StaticResource MusicPlayerButtonImage}" Cursor="Hand"/>
                         </StackPanel>
                     </Button>
                     <Button x:Name="NextSongButton" ToolTip="Next"
                         Command="{Binding NextSongCommand}"
                         Style="{StaticResource MusicPlayerButton}">
                         <StackPanel>
-                            <Image Source="pack://application:,,,/Icons/next.png" Style="{StaticResource MusicPlayerButtonImage}">
-                                
-                            </Image>
+                            <Image Source="/Icons/next.png" Style="{StaticResource MusicPlayerButtonImage}" Cursor="Hand"/>
                         </StackPanel>
                     </Button>
                     <Button x:Name="StopButton" ToolTip="Stop"
