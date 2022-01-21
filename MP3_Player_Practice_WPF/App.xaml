@@ -1,0 +1,19 @@
+﻿<Application x:Class="MP3_Player_Practice_WPF.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:MP3_Player_Practice_WPF"
+             StartupUri="MainWindow.xaml">
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="./Themes/SliderTheme.xaml"/>
+                <ResourceDictionary Source="./Themes/PlaylistItemTheme.xaml"/>
+                <ResourceDictionary Source="./Themes/MusicPlayerButtonTheme.xaml"/>
+                <ResourceDictionary Source="./Themes/CheckBoxTheme.xaml"/>
+                <ResourceDictionary Source="./Themes/TitleBarButtonTheme.xaml"/>
+                <ResourceDictionary Source="./Themes/NavigationListView.xaml"/>
+                <ResourceDictionary Source="./Themes/CustomScrollBar.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>
