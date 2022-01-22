@@ -7,9 +7,15 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="Icons\next.png" />
+    <None Remove="Icons\music_note_icon.png" />
+    <None Remove="Icons\next_icon.png" />
     <None Remove="Icons\pause-play.png" />
+    <None Remove="Icons\preferences_icon.png" />
     <None Remove="Icons\previous.png" />
+    <None Remove="Icons\previous_icon.png" />
+    <None Remove="Icons\volume_full_icon.png" />
+    <None Remove="Icons\volume_half_icon.png" />
+    <None Remove="Icons\volume_mute_icon.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -22,12 +28,18 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="Icons\music_note_icon.png" />
+    <Resource Include="Icons\next_icon.png" />
     <Resource Include="Icons\pause-play.png" />
   </ItemGroup>
 
   <ItemGroup>
-    <Resource Include="Icons\next.png" />
+    <Resource Include="Icons\preferences_icon.png" />
     <Resource Include="Icons\previous.png" />
+    <Resource Include="Icons\previous_icon.png" />
+    <Resource Include="Icons\volume_full_icon.png" />
+    <Resource Include="Icons\volume_half_icon.png" />
+    <Resource Include="Icons\volume_mute_icon.png" />
   </ItemGroup>
 
   <ItemGroup>
