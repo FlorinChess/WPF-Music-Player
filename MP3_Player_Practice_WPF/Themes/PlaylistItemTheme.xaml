@@ -20,10 +20,9 @@
                             Margin="4,0,4,1">
                         <StackPanel Orientation="Horizontal"
                                     Margin="10,0,0,0">
-                            <Border CornerRadius="25"
-                                    Width="30"
-                                    Height="30"
-                                    Background="#8d32c2"/>
+                            <Border CornerRadius="25" Width="35" Height="35" Background="#4d4d4d">
+                                <Image Source="/Icons/music_note_icon.png" Height="20" Width="20"/>
+                            </Border>
 
                             <StackPanel Orientation="Vertical" Margin="0">
                                 <Label Content="{Binding Name}"

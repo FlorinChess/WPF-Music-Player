@@ -13,6 +13,8 @@ namespace MP3_Player_Practice_WPF.MVVM.ViewModel
 
         private Timer timer = new Timer() { Interval = 1000 };
 
+        private float _savedVolume;
+
         #region Properties
         private double _sliderPosition = 0;
         public double SliderPosition
@@ -86,6 +88,7 @@ namespace MP3_Player_Practice_WPF.MVVM.ViewModel
         public RelayCommand NextSongCommand { get; set; }
         public RelayCommand PlaylistSelectionChanged { get; set;}
         public RelayCommand SeekCommand { get; set; }
+        public RelayCommand MuteCommand { get; set; }
 
         #endregion
 
@@ -104,13 +107,22 @@ namespace MP3_Player_Practice_WPF.MVVM.ViewModel
             PreviousSongCommand = new RelayCommand((o) => PreviousSong());
             NextSongCommand = new RelayCommand((o) => NextSong());
             PlaylistSelectionChanged = new RelayCommand((o) => OnSelectionChanged());
-            
+            MuteCommand = new RelayCommand((o) => Mute());
+
             musicPlayer.PlaybackStopped += MusicPlayer_PlaybackStopped;
+        }
+
+        private void Mute()
+        {
+            if(Volume > 0)
+                _savedVolume = _volume;
+
+            _= Volume != 0 ? Volume = 0 : Volume = _savedVolume;
         }
 
         private void NextSong()
         {
-            // TODO: don't repeat selected song, update UI SelectedSong
+            // TODO: don't repeat selected song
 
             if (musicPlayer != null)
             {
@@ -128,7 +140,7 @@ namespace MP3_Player_Practice_WPF.MVVM.ViewModel
 
         private void PreviousSong()
         {
-            // TODO: don't repeat selected song, update UI SelectedSong
+            // TODO: don't repeat selected song
 
             if (musicPlayer != null)
             {

@@ -24,6 +24,7 @@
 
     <Window.Resources>
         <converters:SecondsToTimeSpanConverter x:Key="SecondsToTimeSpanConverter"/>
+        <converters:VolumeToImageConverter x:Key="VolumeToImageConverter"/>
     </Window.Resources>
 
     <Behaviors:Interaction.Triggers>
@@ -125,8 +126,6 @@
                 </Slider>
             </StackPanel>
 
-            
-
             <Grid Grid.Row="1" Grid.ColumnSpan="3">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="0.8*"/>
@@ -134,8 +133,8 @@
                     <ColumnDefinition Width="0.8*"/>
                 </Grid.ColumnDefinitions>
 
-                <StackPanel Grid.Column="0" Orientation="Vertical" HorizontalAlignment="Left" Margin="10,0,0,0">
-                    <TextBlock TextTrimming="CharacterEllipsis" Padding="2" FontSize="22" Foreground="WhiteSmoke" Text="{Binding SelectedSong.Name}"/>
+                <StackPanel Grid.Column="0" Grid.ColumnSpan="3" Orientation="Vertical" HorizontalAlignment="Left" Margin="10,0,0,0">
+                    <TextBlock TextTrimming="CharacterEllipsis" Padding="2" FontSize="22" Foreground="WhiteSmoke" Text=""/>
                     <TextBlock TextTrimming="CharacterEllipsis" Padding="2" FontSize="16" Foreground="Gray" Text="{Binding SelectedSong.Artist}"/>
                 </StackPanel>
 
@@ -148,7 +147,7 @@
                         Command ="{Binding PreviousSongCommand}"
                         Style="{StaticResource MusicPlayerButton}">
                         <StackPanel>
-                            <Image Source="/Icons/previous.png" Style="{StaticResource MusicPlayerButtonImage}" Cursor="Hand"/>
+                            <Image Source="/Icons/previous_icon.png" Style="{StaticResource MusicPlayerButtonImage}" Height="40" Width="40" Cursor="Hand"/>
                         </StackPanel>
                     </Button>
                     <Button x:Name="PlayPauseButton" ToolTip="Play/Pause" 
@@ -162,7 +161,7 @@
                         Command="{Binding NextSongCommand}"
                         Style="{StaticResource MusicPlayerButton}">
                         <StackPanel>
-                            <Image Source="/Icons/next.png" Style="{StaticResource MusicPlayerButtonImage}" Cursor="Hand"/>
+                            <Image Source="/Icons/next_icon.png" Style="{StaticResource MusicPlayerButtonImage}" Height="40" Width="40" Cursor="Hand"/>
                         </StackPanel>
                     </Button>
                     <Button x:Name="StopButton" ToolTip="Stop"
@@ -172,10 +171,32 @@
 
                 </StackPanel>
 
-                <Slider Grid.Column="2" HorizontalAlignment="Left" Width="100" VerticalAlignment="Center"
-                    Minimum="0" Maximum="100" SmallChange="1"
-                    Style="{StaticResource Horizontal_Slider}"
-                    Value="{Binding Volume}"/>
+                <Grid Grid.Column="2" VerticalAlignment="Center">
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="10,0">
+                        <!-- Image-->
+                        <Button x:Name="MuteButton" ToolTip="Mute"
+                                Command="{Binding MuteCommand}"
+                                Style="{StaticResource MusicPlayerButton}">
+                            <StackPanel>
+                                <!-- <Image Source="{Binding ElementName= VolumeSlider, Path=Value, Converter={StaticResource VolumeToImageConverter}}" Height="35" Width="35" Cursor="Hand"/> -->
+                            </StackPanel>
+
+                        </Button>
+                        <Slider x:Name="VolumeSlider" Grid.Column="2" HorizontalAlignment="Left" Width="100" VerticalAlignment="Center"
+                            Minimum="0" Maximum="100" SmallChange="1"
+                            Style="{StaticResource Horizontal_Slider}"
+                            Value="{Binding Volume}"/>
+                    </StackPanel>
+                    
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="10,0">
+                        <Button x:Name="OpenPreferencesButton" ToolTip="Preferences"
+                                Style="{StaticResource MusicPlayerButton}">
+                            <StackPanel>
+                                <Image Source="/Icons/preferences_icon.png" Style="{StaticResource MusicPlayerButtonImage}" Height="25" Width="25" Cursor="Hand" />
+                            </StackPanel>
+                        </Button>
+                    </StackPanel>
+                </Grid>
             </Grid>
         </Grid>
     </Grid>
