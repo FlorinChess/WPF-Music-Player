@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Drawing;
 
 namespace MP3_Player_Practice_WPF.MVVM.Model
 {

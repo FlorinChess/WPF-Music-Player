@@ -5,26 +5,43 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:viewmodel="clr-namespace:MP3_Player_Practice_WPF.MVVM.ViewModel"
         xmlns:local="clr-namespace:MP3_Player_Practice_WPF" 
-        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity" 
         xmlns:Behaviors="http://schemas.microsoft.com/xaml/behaviors" 
-        xmlns:converters="clr-namespace:MP3_Player_Practice_WPF.Converters"
+        xmlns:converters="clr-namespace:MP3_Player_Practice_WPF.Converters" xmlns:views="clr-namespace:MP3_Player_Practice_WPF.MVVM.View"
         mc:Ignorable="d"
+        MinWidth="300" MinHeight="200"
         Height="600" Width="900"
         Background="#333333"
-        WindowStyle="None" 
+        WindowStyle="None"
         AllowsTransparency="True"
-        WindowStartupLocation="CenterScreen">
+        WindowStartupLocation="CenterScreen"
+        Title="{Binding SelectedSong.Name}">
+
+    <WindowChrome.WindowChrome>
+        <WindowChrome CaptionHeight="35" ResizeBorderThickness="6"/>
+    </WindowChrome.WindowChrome>
+
     <Window.DataContext>
         <viewmodel:MainViewModel/>
     </Window.DataContext>
-
-    <WindowChrome.WindowChrome>
-        <WindowChrome CaptionHeight="30"/>
-    </WindowChrome.WindowChrome>
-
+    
     <Window.Resources>
         <converters:SecondsToTimeSpanConverter x:Key="SecondsToTimeSpanConverter"/>
         <converters:VolumeToImageConverter x:Key="VolumeToImageConverter"/>
+
+        <!--<Style TargetType="{x:Type local:MainWindow}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Window}">
+                        --><!-- Window Outter Border : dropshadow effect --><!--
+                        <Border x:Name="Container" Padding="{Binding WindowResize,  FallbackValue=6}">
+                            <Grid Background="Green">
+                                <Border CornerRadius="6"/>
+                            </Grid>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>-->
     </Window.Resources>
 
     <Behaviors:Interaction.Triggers>
@@ -33,19 +50,51 @@
         </Behaviors:EventTrigger>
     </Behaviors:Interaction.Triggers>
 
-    <Grid>
+    <Window.InputBindings>
+        <KeyBinding Key="M" Command="{Binding MuteCommand}"/>
+        <KeyBinding Key="Space" Command="{Binding PlayPauseCommand}"/>
+    </Window.InputBindings>
+    
+    <Window.TaskbarItemInfo>
+        <TaskbarItemInfo x:Name="taskBarItemInfo1" 
+                     ThumbnailClipMargin="80,0,80,140"
+                     Description="{Binding SelectedSong.Name}">
+            <TaskbarItemInfo.ThumbButtonInfos>
+                <ThumbButtonInfoCollection>
+                    <ThumbButtonInfo
+                    DismissWhenClicked="False"
+                    Command="{Binding PreviousSongCommand}"
+                    CommandTarget="{Binding ElementName=PreviousSongButton}"
+                    Description="Previous"/>
+                    <ThumbButtonInfo
+                    DismissWhenClicked="False"
+                    Command="{Binding PlayPauseCommand}"
+                    CommandTarget="{Binding ElementName=PlayPauseButton}"
+                    Description="Play"/>
+                    <ThumbButtonInfo
+                    DismissWhenClicked="False"
+                    Command="{Binding NextSongCommand}"
+                    CommandTarget="{Binding ElementName=NextSongButton}"
+                    Description="Next"/>
+                </ThumbButtonInfoCollection>
+            </TaskbarItemInfo.ThumbButtonInfos>
+        </TaskbarItemInfo>
+    </Window.TaskbarItemInfo>
+
+    <Grid x:Name="Main">
         <Grid.RowDefinitions>
             <RowDefinition Height="35"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="120"/>
         </Grid.RowDefinitions>
-
+        
+        <!-- Custom Window TitleBar : can use ZIndex to bring Grid to foreground for button functionality-->
         <Grid Name="TitleBar" VerticalAlignment="Top" Background="#252525" Height="35">
             <Label Foreground="Gray" Content="WaveZ Prototype" VerticalAlignment="Center" HorizontalAlignment="Left"/>
             <StackPanel WindowChrome.IsHitTestVisibleInChrome="True" VerticalAlignment="Center" HorizontalAlignment="Right" Orientation="Horizontal" Name="WindowControls">
-                <Button Foreground="Gray" FontSize="17" Background="Transparent" BorderThickness="0" Height="35" Width="35" Content="-" Padding="0" Name="MinimizeButton"/>
-                <Button Foreground="Gray" FontSize="17" Background="Transparent" BorderThickness="0" Height="35" Width="35" Content="+" Padding="0" Name="MaximizeButton"/>
-                <Button Foreground="Gray" FontSize="17" Background="Transparent" BorderThickness="0" Height="35" Width="35" Content="x" Padding="0" Name="ExitButton"/>
+                <Button Template="{DynamicResource ButtonTemplateNoHover}" Foreground="Gray" FontSize="17" Background="Transparent" BorderThickness="0" Height="35" Width="35" Content="-" Padding="0" Name="MinimizeButton"/>
+                <Button Template="{DynamicResource ButtonTemplateNoHover}" Foreground="Gray" FontSize="17" Background="Transparent" BorderThickness="0" Height="35" Width="35" Content="+" Padding="0" Name="MaximizeButton"/>
+                <Button Template="{DynamicResource ButtonTemplateNoHover}" Foreground="Gray" FontSize="17" Background="Transparent" BorderThickness="0" Height="35" Width="35" Content="x" Padding="0" Name="ExitButton"/>
             </StackPanel>
         </Grid>
         
@@ -55,22 +104,58 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
 
-            <Grid Grid.Row="1">
+            <!-- Menu Buttons -->
+            <Grid>
                 <StackPanel>
+                    <Button>s
+                        <Button.Style>
+                            <Style TargetType="{x:Type Button}">
+                                <Setter Property="Background" Value="Black"/>
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate>
+                                            <StackPanel Orientation="Horizontal" Height="50" Margin="1">
+                                                <Image Height="35" Width="35" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                                                <TextBlock Text="Home" Foreground="WhiteSmoke" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                                            </StackPanel>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                            </Style>
+                        </Button.Style>
+                    </Button>
+                    <Button>
+                        <Button.Template>
+                            <ControlTemplate>
+                                <StackPanel Orientation="Horizontal" Height="50" Margin="1">
+                                    <Image Height="35" Width="35" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                                    <TextBlock Text="Home" Foreground="WhiteSmoke" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                                </StackPanel>
+                            </ControlTemplate>
+                        </Button.Template>
+                    </Button>
+                    <Button>
+                        <Button.Template>
+                            <ControlTemplate>
+                                <StackPanel Orientation="Horizontal" Height="50" Margin="1">
+                                    <Image Height="35" Width="35" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                                    <TextBlock Text="Home" Foreground="WhiteSmoke" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                                </StackPanel>
+                            </ControlTemplate>
+                        </Button.Template>
+                    </Button>
                 </StackPanel>
-                
-                <ListView Background="Transparent" BorderThickness="0"
-                          ItemContainerStyle="{StaticResource NavigationListView}">
-                </ListView>
             </Grid>
-
+            
+            <!-- Playlist Grid -->
             <Grid Name="PlaylistGrid" Grid.Column="1" Background="#252525">
 
                 <Grid.RowDefinitions>
                     <RowDefinition Height="50"/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
-
+                
+                <!-- Playlist Tools-->
                 <StackPanel Grid.Row="0" Orientation="Horizontal" Background="#181818">
                     <StackPanel Margin="0,0,20,0">
                         <Label VerticalAlignment="Top" Foreground="WhiteSmoke" FontSize="18" Content="{Binding Playlist.Name}"/>
@@ -85,12 +170,14 @@
                                   Style="{StaticResource CheckBoxTheme}" IsChecked="{Binding IsShuffleEnabled}"/>
                     </StackPanel>
                 </StackPanel>
-
+                
+                <!-- Playlist Items -->
                 <ListView x:Name="Playlist" Grid.Row="1" Background="Transparent"
                           BorderThickness="0"
                           ItemsSource="{Binding Playlist.Songs}"
                           SelectedItem="{Binding SelectedSong, Mode=TwoWay}"
-                          ItemContainerStyle="{StaticResource SongItem}">
+                          ItemContainerStyle="{StaticResource SongItem}"
+                          IsTextSearchEnabled="True">
                     <Behaviors:Interaction.Triggers>
                         <Behaviors:EventTrigger EventName="SelectionChanged" SourceObject="{Binding ElementName=Playlist}">
                             <Behaviors:InvokeCommandAction Command="{Binding PlaylistSelectionChanged}" CommandParameter="{x:Null}" />
@@ -101,7 +188,8 @@
         </Grid>
         
         <Grid Grid.Row="2" Background="#181818">
-            
+
+            <!--#region Row and Column definitions -->
             <Grid.RowDefinitions>
                 <RowDefinition Height="40"/>
                 <RowDefinition/>
@@ -112,7 +200,8 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="100"/>
             </Grid.ColumnDefinitions>
-
+            <!--#endregion-->
+            
             <Label Padding="4" Margin="10,0" Grid.Column="0" FontSize="18" Foreground="Gray" Content="{Binding SliderPosition, Converter={StaticResource SecondsToTimeSpanConverter}}" />
             <Label Padding="4" Margin="10,0" Grid.Column="2" FontSize="18" Foreground="Gray" Content="{Binding TrackLength, Converter={StaticResource SecondsToTimeSpanConverter}}" />
 
@@ -132,42 +221,96 @@
                     <ColumnDefinition/>
                     <ColumnDefinition Width="0.8*"/>
                 </Grid.ColumnDefinitions>
-
-                <StackPanel Grid.Column="0" Grid.ColumnSpan="3" Orientation="Vertical" HorizontalAlignment="Left" Margin="10,0,0,0">
-                    <TextBlock TextTrimming="CharacterEllipsis" Padding="2" FontSize="22" Foreground="WhiteSmoke" Text=""/>
-                    <TextBlock TextTrimming="CharacterEllipsis" Padding="2" FontSize="16" Foreground="Gray" Text="{Binding SelectedSong.Artist}"/>
+                
+                <!-- Selected Song: Name and Artist -->
+                <StackPanel Orientation="Horizontal"  Margin="10,0,0,0">
+                    <Border CornerRadius="25" Background="Transparent">
+                        <Image Height="40" Width="40" Source="/Icons/music_note_icon.png"/>
+                    </Border>
+                    <StackPanel Grid.Column="0" Orientation="Vertical" HorizontalAlignment="Left" Margin="10,0,0,0">
+                        <TextBlock TextTrimming="CharacterEllipsis" Padding="2" FontSize="22" Foreground="WhiteSmoke" Text="{Binding SelectedSong.Name}"/>
+                        <TextBlock TextTrimming="CharacterEllipsis" Padding="2" FontSize="16" Foreground="Gray" Text="{Binding SelectedSong.Artist}"/>
+                    </StackPanel>
                 </StackPanel>
-
-                <StackPanel x:Name="MusicPlayerButtons" Grid.Row="2" Grid.Column="1" Margin="0" Orientation="Horizontal"
-                        HorizontalAlignment="Center" VerticalAlignment="Center">
-                    <Button x:Name="ReplayButton" ToolTip="Replay" Command="{Binding ReplayCommand}"                        
-                        Content="Replay" Foreground="WhiteSmoke"
-                        Style="{StaticResource MusicPlayerButton}"/>
-                    <Button x:Name="PreviousSong" ToolTip="Previous" 
-                        Command ="{Binding PreviousSongCommand}"
-                        Style="{StaticResource MusicPlayerButton}">
+                
+                <!-- Music Player Buttons -->
+                <StackPanel x:Name="MusicPlayerButtons" Grid.Row="2" Grid.Column="1" 
+                            Margin="0" Orientation="Horizontal"
+                            HorizontalAlignment="Center" VerticalAlignment="Center">
+                    
+                    <!-- Replay Button -->
+                    <Button x:Name="ReplayButton" ToolTip="Replay" 
+                            Template="{DynamicResource ButtonTemplateNoHover}"                      
+                            Command="{Binding ReplayCommand}" 
+                            Style="{StaticResource MusicPlayerButton}">
+                        <StackPanel>
+                            <Image Source="/Icons/replay_icon.png" Style="{StaticResource MusicPlayerButtonImage}" Height="40" Width="40" Cursor="Hand"/>
+                        </StackPanel>
+                        <Button.Resources>
+                            <Style TargetType="Border">
+                                <Setter Property="CornerRadius" Value="25"/>
+                            </Style>
+                        </Button.Resources>
+                    </Button>
+                    
+                    <!-- Previous Song Button -->
+                    <Button x:Name="PreviousSongButton" ToolTip="Previous" 
+                            Template="{DynamicResource ButtonTemplateNoHover}" 
+                            Command ="{Binding PreviousSongCommand}"
+                            Style="{StaticResource MusicPlayerButton}">
                         <StackPanel>
                             <Image Source="/Icons/previous_icon.png" Style="{StaticResource MusicPlayerButtonImage}" Height="40" Width="40" Cursor="Hand"/>
                         </StackPanel>
+                        <Button.Resources>
+                            <Style TargetType="Border">
+                                <Setter Property="CornerRadius" Value="25"/>
+                            </Style>
+                        </Button.Resources>
                     </Button>
+                    
+                    <!-- Play/Pause Button -->
                     <Button x:Name="PlayPauseButton" ToolTip="Play/Pause" 
-                        Command="{Binding PlayPauseCommand}"
-                        Style="{StaticResource MusicPlayerButton}">
+                            Template="{DynamicResource ButtonTemplateNoHover}" 
+                            Command="{Binding PlayPauseCommand}"
+                            Style="{StaticResource MusicPlayerButton}">
                         <StackPanel>
                             <Image Source="/Icons/pause-play.png" Style="{StaticResource MusicPlayerButtonImage}" Cursor="Hand"/>
                         </StackPanel>
+                        <Button.Resources>
+                            <Style TargetType="Border">
+                                <Setter Property="CornerRadius" Value="25"/>
+                            </Style>
+                        </Button.Resources>
                     </Button>
-                    <Button x:Name="NextSongButton" ToolTip="Next"
+                    
+                    <!-- Next Song Button -->
+                    <Button Template="{DynamicResource ButtonTemplateNoHover}" x:Name="NextSongButton" ToolTip="Next"
                         Command="{Binding NextSongCommand}"
                         Style="{StaticResource MusicPlayerButton}">
                         <StackPanel>
                             <Image Source="/Icons/next_icon.png" Style="{StaticResource MusicPlayerButtonImage}" Height="40" Width="40" Cursor="Hand"/>
                         </StackPanel>
+                        <Button.Resources>
+                            <Style TargetType="Border">
+                                <Setter Property="CornerRadius" Value="25"/>
+                            </Style>
+                        </Button.Resources>
                     </Button>
+                    
+                    <!-- Stop Button -->
                     <Button x:Name="StopButton" ToolTip="Stop"
-                        Command="{Binding StopCommand}"
-                        Content="Stop" Foreground="WhiteSmoke"
-                        Style="{StaticResource MusicPlayerButton}"/>
+                            Template="{DynamicResource ButtonTemplateNoHover}"
+                            Command="{Binding StopCommand}"
+                            Style="{StaticResource MusicPlayerButton}" Cursor="Hand">
+                        <StackPanel>
+                            <Image Source="/Icons/stop_icon.png" Style="{StaticResource MusicPlayerButtonImage}" Height="40" Width="40" Cursor="Hand"/>
+                        </StackPanel>
+                        <Button.Resources>
+                            <Style TargetType="Border">
+                                <Setter Property="CornerRadius" Value="25"/>
+                            </Style>
+                        </Button.Resources>
+                    </Button>
 
                 </StackPanel>
 
@@ -175,25 +318,35 @@
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="10,0">
                         <!-- Image-->
                         <Button x:Name="MuteButton" ToolTip="Mute"
+                                Template="{DynamicResource ButtonTemplateNoHover}"
                                 Command="{Binding MuteCommand}"
-                                Style="{StaticResource MusicPlayerButton}">
-                            <StackPanel>
-                                <!-- <Image Source="{Binding ElementName= VolumeSlider, Path=Value, Converter={StaticResource VolumeToImageConverter}}" Height="35" Width="35" Cursor="Hand"/> -->
-                            </StackPanel>
+                                Style="{StaticResource MusicPlayerButton}"
+                                Content="Mute" Cursor="Hand">
+                            <!--<StackPanel>
+                                --><!-- TODO: redo images -->
+                                <!-- <Image Source="{Binding ElementName= VolumeSlider, Path=Value, Converter={StaticResource VolumeToImageConverter}}" Height="35" Width="35" Cursor="Hand"/> --><!--
+                            </StackPanel>-->
 
                         </Button>
                         <Slider x:Name="VolumeSlider" Grid.Column="2" HorizontalAlignment="Left" Width="100" VerticalAlignment="Center"
                             Minimum="0" Maximum="100" SmallChange="1"
                             Style="{StaticResource Horizontal_Slider}"
-                            Value="{Binding Volume}"/>
+                            Value="{Binding Volume}"
+                            Cursor="Hand"/>
                     </StackPanel>
                     
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="10,0">
                         <Button x:Name="OpenPreferencesButton" ToolTip="Preferences"
+                                Template="{DynamicResource ButtonTemplateNoHover}"
                                 Style="{StaticResource MusicPlayerButton}">
                             <StackPanel>
                                 <Image Source="/Icons/preferences_icon.png" Style="{StaticResource MusicPlayerButtonImage}" Height="25" Width="25" Cursor="Hand" />
                             </StackPanel>
+                            <Button.Resources>
+                                <Style TargetType="Border">
+                                    <Setter Property="CornerRadius" Value="25"/>
+                                </Style>
+                            </Button.Resources>
                         </Button>
                     </StackPanel>
                 </Grid>

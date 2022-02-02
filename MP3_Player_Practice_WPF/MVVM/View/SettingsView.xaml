@@ -6,13 +6,19 @@
              xmlns:local="clr-namespace:MP3_Player_Practice_WPF.MVVM.View" xmlns:viewmodel="clr-namespace:MP3_Player_Practice_WPF.MVVM.ViewModel"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800"
-             Background="White">
+             Background="Transparent">
 
     <UserControl.DataContext>
         <viewmodel:SettingsViewModel/>
     </UserControl.DataContext>
+
+    <UserControl.Resources>
+        <Style TargetType="{x:Type TextBlock}">
+            <Setter Property="Foreground" Value="WhiteSmoke"/>
+        </Style>
+    </UserControl.Resources>
     
-    <Grid>
+    <Grid Background="Transparent">
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
             <ColumnDefinition/>
@@ -22,10 +28,10 @@
         </Grid.RowDefinitions>
 
         <StackPanel Grid.Row="0">
-            <TextBlock Text=""/>
-            <TextBlock Text=""/>
-            <TextBlock Text=""/>
-            <TextBlock Text=""/>
+            <TextBlock Text="Volume"/>
+            <TextBlock Text="Enable Autoplay"/>
+            <TextBlock Text="Enable Autostart"/>
+            <TextBlock Text="Enable smooth transition"/>
             <TextBlock Text=""/>
             <TextBlock Text=""/>
         </StackPanel>

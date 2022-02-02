@@ -9,11 +9,17 @@ namespace MP3_Player_Practice_WPF.MVVM.ViewModel
 {
     public class MainViewModel : ObservableObject
     {
+        #region Private Members
+
         private MusicPlayer musicPlayer;
 
         private Timer timer = new Timer() { Interval = 1000 };
 
+        private readonly string path = Microsoft.Win32.Registry.GetValue(@"HKEY_CLASSES_ROOT\ChromeHTML\shell\open\command", null, null) as string;
+
         private float _savedVolume;
+
+        #endregion
 
         #region Properties
         private double _sliderPosition = 0;
@@ -65,17 +71,18 @@ namespace MP3_Player_Practice_WPF.MVVM.ViewModel
         }
         public PlaylistModel Playlist { get; set; }
 
-        private bool _isAutoplayEnabled;
-        public bool IsAutoplayEnabled 
-        { 
+        private bool _isAutoplayEnabled = true;
+        public bool IsAutoplayEnabled
+        {
             get => _isAutoplayEnabled;
-            set 
-            { 
+            set
+            {
                 _isAutoplayEnabled = value;
                 OnPropertyChanged();
-            } 
+            }
         }
         public bool IsShuffleEnabled { get; set; }
+        public bool IsReplayEnabled { get; set; }
         #endregion
 
         #region Commands
@@ -86,18 +93,19 @@ namespace MP3_Player_Practice_WPF.MVVM.ViewModel
         public RelayCommand RedirectToDonationCommand { get; set; }
         public RelayCommand PreviousSongCommand { get; set; }
         public RelayCommand NextSongCommand { get; set; }
-        public RelayCommand PlaylistSelectionChanged { get; set;}
+        public RelayCommand PlaylistSelectionChanged { get; set; }
         public RelayCommand SeekCommand { get; set; }
         public RelayCommand MuteCommand { get; set; }
 
         #endregion
 
+        #region Constrctor
         public MainViewModel()
         {
             PopulateList();
 
             timer.Elapsed += Timer_Elapsed;
-            musicPlayer = new MusicPlayer(Playlist.Songs[0].FilePath, _volume);
+            musicPlayer = new MusicPlayer(Playlist.Songs[0].FilePath, _volume, MusicPlayer_PlaybackStopped);
 
             PlayPauseCommand = new RelayCommand((o) => PlayPause());
             StopCommand = new RelayCommand((o) => Stop());
@@ -112,12 +120,16 @@ namespace MP3_Player_Practice_WPF.MVVM.ViewModel
             musicPlayer.PlaybackStopped += MusicPlayer_PlaybackStopped;
         }
 
+        #endregion
+
+        #region Methoden
+
         private void Mute()
         {
-            if(Volume > 0)
+            if (Volume > 0)
                 _savedVolume = _volume;
 
-            _= Volume != 0 ? Volume = 0 : Volume = _savedVolume;
+            _ = Volume != 0 ? Volume = 0 : Volume = _savedVolume;
         }
 
         private void NextSong()
@@ -134,7 +146,7 @@ namespace MP3_Player_Practice_WPF.MVVM.ViewModel
                     SelectedSong = Playlist.Songs[index + 1];
                 }
 
-                PlayPause(); 
+                PlayPause();
             }
         }
 
@@ -152,7 +164,7 @@ namespace MP3_Player_Practice_WPF.MVVM.ViewModel
                     SelectedSong = Playlist.Songs[index - 1];
                 }
 
-                PlayPause(); 
+                PlayPause();
             }
         }
 
@@ -163,6 +175,8 @@ namespace MP3_Player_Practice_WPF.MVVM.ViewModel
 
         private void MusicPlayer_PlaybackStopped()
         {
+            // TODO: Fix Action in Class Library
+
             timer.Stop();
 
             int index = Playlist.Songs.IndexOf(_selectedSong);
@@ -197,6 +211,8 @@ namespace MP3_Player_Practice_WPF.MVVM.ViewModel
                     });
                 }
             }
+
+            
 
             //var f = TagLib.File.Create(@"C:\Users\Dell\Music");
 
@@ -251,7 +267,10 @@ namespace MP3_Player_Practice_WPF.MVVM.ViewModel
         }
         public void Replay()
         {
+            if (IsReplayEnabled)
+            {
 
+            }
         }
         public void Seek(double value)
         {
@@ -264,7 +283,12 @@ namespace MP3_Player_Practice_WPF.MVVM.ViewModel
         }
         public void RedirectToDonation()
         {
-
+            if (path != null)
+            {
+                string[] split = this.path.Split('\"');
+                var path = split.Length >= 2 ? split[1] : null;
+            }
+            System.Diagnostics.Process.Start(path, "https://ko-fi.com/florin_chess#paypalModal");
         }
         public void ResetPlayer()
         {
@@ -279,13 +303,14 @@ namespace MP3_Player_Practice_WPF.MVVM.ViewModel
         }
         public void OnSelectionChanged()
         {
+            musicPlayer.PlaybackStopType = PlaybackStopTypes.PlaybackStoppedByUser;
+
             if (timer.Enabled)
             {
                 timer.Stop();
             }
             ResetPlayer();
             PlayPause();
-
         }
         public void OnSliderDragged(bool isCurrentlyDragging)
         {
@@ -299,6 +324,8 @@ namespace MP3_Player_Practice_WPF.MVVM.ViewModel
                 timer.Stop();
             }
         }
+
+        #endregion
 
     }
 }

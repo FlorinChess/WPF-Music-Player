@@ -3,6 +3,7 @@ using System;
 using System.Runtime.InteropServices;
 using System.Windows;
 using System.Windows.Interop;
+using System.Windows.Shell;
 
 namespace MP3_Player_Practice_WPF
 {
@@ -11,13 +12,17 @@ namespace MP3_Player_Practice_WPF
     /// </summary>
     public partial class MainWindow : Window
     {
-        MainViewModel wm;
+        MainViewModel wm = new MainViewModel();
         bool isUserDraggingSlider = false;
         public MainWindow()
         {
             InitializeComponent();
+
+            TaskbarItemInfo taskbarItemInfo = new TaskbarItemInfo();
+            this.DataContext = wm;
+
             ExitButton.Click += (s, e) => Close();
-            MaximizeButton.Click += (s, e) => WindowState = WindowState == WindowState.Normal ? WindowState.Maximized : WindowState.Normal;
+            MaximizeButton.Click += (s, e) => WindowState ^= WindowState.Maximized; // XOR operator: expression functions the same as WindowState == WindowState.Normal ? WindowState.Maximized : WindowState.Normal
             MinimizeButton.Click += (s, e) => WindowState = WindowState.Minimized;
 
             // Needed for custom window
@@ -30,15 +35,12 @@ namespace MP3_Player_Practice_WPF
         private void Slider_DragStarted(object sender, System.Windows.Controls.Primitives.DragStartedEventArgs e)
         {
             isUserDraggingSlider = true;
-            wm = (MainViewModel)this.DataContext;
             wm.OnSliderDragged(isUserDraggingSlider);
         }
 
         private void Slider_DragCompleted(object sender, System.Windows.Controls.Primitives.DragCompletedEventArgs e)
         {
             isUserDraggingSlider = false;
-
-            wm = (MainViewModel)this.DataContext;
             wm.Seek(TrackBar.Value);
             wm.OnSliderDragged(isUserDraggingSlider);
         }
