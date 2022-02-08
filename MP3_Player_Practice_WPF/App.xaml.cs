@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MP3_Player_Practice_WPF.MVVM.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
@@ -13,5 +14,15 @@ namespace MP3_Player_Practice_WPF
     /// </summary>
     public partial class App : Application
     {
+        protected override void OnStartup(StartupEventArgs e)
+        {
+            MainWindow = new MainWindow()
+            {
+                DataContext = new MainViewModel()
+            };
+            MainWindow.Show();
+
+            base.OnStartup(e);
+        }
     }
 }
