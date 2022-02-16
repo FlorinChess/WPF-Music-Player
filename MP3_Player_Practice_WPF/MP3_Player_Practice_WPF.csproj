@@ -2,22 +2,34 @@
 
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
-    <TargetFramework>net5.0-windows10.0.17763.0</TargetFramework>
+    <TargetFramework>net5.0-windows10.0.22000.0</TargetFramework>
     <UseWPF>true</UseWPF>
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Icons\baseline_home_white_24dp.png" />
+    <None Remove="Icons\baseline_library_music_white_24dp.png" />
+    <None Remove="Icons\baseline_pause_white_24dp.png" />
+    <None Remove="Icons\baseline_play_arrow_white_24dp.png" />
+    <None Remove="Icons\baseline_repeat_white_24dp.png" />
+    <None Remove="Icons\baseline_settings_white_24dp.png" />
+    <None Remove="Icons\baseline_skip_next_white_24dp.png" />
+    <None Remove="Icons\baseline_skip_previous_white_24dp.png" />
+    <None Remove="Icons\baseline_stop_white_24dp.png" />
     <None Remove="Icons\music_note_icon.png" />
-    <None Remove="Icons\next_icon.png" />
-    <None Remove="Icons\pause-play.png" />
-    <None Remove="Icons\preferences_icon.png" />
-    <None Remove="Icons\previous.png" />
-    <None Remove="Icons\previous_icon.png" />
-    <None Remove="Icons\replay_icon.png" />
-    <None Remove="Icons\stop_icon.png" />
-    <None Remove="Icons\volume_full_icon.png" />
-    <None Remove="Icons\volume_half_icon.png" />
-    <None Remove="Icons\volume_mute_icon.png" />
+    <None Remove="Icons\outline_close_white_24dp.png" />
+    <None Remove="Icons\outline_menu_white_24dp.png" />
+    <None Remove="Icons\outline_playlist_add_check_white_24dp.png" />
+    <None Remove="Icons\outline_playlist_add_white_24dp.png" />
+    <None Remove="Icons\outline_queue_white_24dp.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Icons\baseline_home_white_24dp.png" />
+    <Resource Include="Icons\baseline_library_music_white_24dp.png" />
+    <Resource Include="Icons\baseline_settings_white_24dp.png" />
+    <Resource Include="Icons\baseline_skip_next_white_24dp.png" />
+    <Resource Include="Icons\baseline_stop_white_24dp.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -27,23 +39,21 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\..\source\repos\Class Libraries\NAudioHelperLibrary\NAudioHelperLibrary\NAudioHelperLibrary.csproj" />
+    <ProjectReference Include="..\..\HamburgerMenu\HamburgerMenu\HamburgerMenu.csproj" />
+    <ProjectReference Include="..\..\LoadingSpinner\LoadingSpinner\LoadingSpinner.csproj" />
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="Icons\baseline_pause_white_24dp.png" />
+    <Resource Include="Icons\baseline_play_arrow_white_24dp.png" />
+    <Resource Include="Icons\baseline_repeat_white_24dp.png" />
+    <Resource Include="Icons\baseline_skip_previous_white_24dp.png" />
     <Resource Include="Icons\music_note_icon.png" />
-    <Resource Include="Icons\next_icon.png" />
-    <Resource Include="Icons\pause-play.png" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Resource Include="Icons\preferences_icon.png" />
-    <Resource Include="Icons\previous.png" />
-    <Resource Include="Icons\previous_icon.png" />
-    <Resource Include="Icons\replay_icon.png" />
-    <Resource Include="Icons\stop_icon.png" />
-    <Resource Include="Icons\volume_full_icon.png" />
-    <Resource Include="Icons\volume_half_icon.png" />
-    <Resource Include="Icons\volume_mute_icon.png" />
+    <Resource Include="Icons\outline_close_white_24dp.png" />
+    <Resource Include="Icons\outline_menu_white_24dp.png" />
+    <Resource Include="Icons\outline_playlist_add_check_white_24dp.png" />
+    <Resource Include="Icons\outline_playlist_add_white_24dp.png" />
+    <Resource Include="Icons\outline_queue_white_24dp.png" />
   </ItemGroup>
 
   <ItemGroup>
