@@ -5,13 +5,12 @@
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="./Themes/SliderTheme.xaml"/>
-                <ResourceDictionary Source="./Themes/PlaylistItemTheme.xaml"/>
-                <ResourceDictionary Source="./Themes/MusicPlayerButtonTheme.xaml"/>
+                <ResourceDictionary Source="./Themes/Button.xaml"/>
                 <ResourceDictionary Source="./Themes/CheckBox.xaml"/>
-                <ResourceDictionary Source="./Themes/TitleBarButtonTheme.xaml"/>
-                <ResourceDictionary Source="./Themes/NavigationListView.xaml"/>
-                <ResourceDictionary Source="./Themes/CustomScrollBar.xaml"/>
+                <ResourceDictionary Source="./Themes/ListViewItem.xaml"/>
+                <ResourceDictionary Source="./Themes/MusicPlayerButton.xaml"/>
+                <ResourceDictionary Source="./Themes/ScrollBar.xaml"/>
+                <ResourceDictionary Source="./Themes/Slider.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>
