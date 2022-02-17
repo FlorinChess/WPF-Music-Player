@@ -8,7 +8,7 @@
                 <ResourceDictionary Source="./Themes/SliderTheme.xaml"/>
                 <ResourceDictionary Source="./Themes/PlaylistItemTheme.xaml"/>
                 <ResourceDictionary Source="./Themes/MusicPlayerButtonTheme.xaml"/>
-                <ResourceDictionary Source="./Themes/CheckBoxTheme.xaml"/>
+                <ResourceDictionary Source="./Themes/CheckBox.xaml"/>
                 <ResourceDictionary Source="./Themes/TitleBarButtonTheme.xaml"/>
                 <ResourceDictionary Source="./Themes/NavigationListView.xaml"/>
                 <ResourceDictionary Source="./Themes/CustomScrollBar.xaml"/>
