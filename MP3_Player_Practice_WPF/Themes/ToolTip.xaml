@@ -1,0 +1,19 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Style TargetType="{x:Type ToolTip}">
+        <Setter Property="Background" Value="#6D6D6D" />
+        <Setter Property="Foreground" Value="#f1f1f1" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ToolTip">
+                    <Border 
+                        CornerRadius="4"
+                        Width="{TemplateBinding Width}"
+                        Height="{TemplateBinding Height}">
+                        <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center" Margin="6"/>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+</ResourceDictionary>
