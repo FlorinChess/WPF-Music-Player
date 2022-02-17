@@ -1,16 +1,8 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     <Style x:Key="SongItem" TargetType="ListViewItem">
-        <Style.Triggers>
-            <Trigger Property="IsSelected" Value="True">
-                <Setter Property="Background" Value="#181818"/>
-                <Setter Property="Foreground" Value="#8d32c2"/>
-            </Trigger>
-        </Style.Triggers>
-
         <Setter Property="Background" Value="#222222"/>
         <Setter Property="Foreground" Value="WhiteSmoke"/>
-
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="ListViewItem">
@@ -18,13 +10,18 @@
                             Height="50"
                             CornerRadius="4"
                             Margin="4,0,4,1">
-                        <StackPanel Orientation="Horizontal"
-                                    Margin="10,0,0,0">
-                            <Border CornerRadius="25" Width="35" Height="35" Background="#4d4d4d">
+                        <StackPanel 
+                            Orientation="Horizontal"
+                            Margin="10,0,0,0">
+                            <Border 
+                                CornerRadius="25"
+                                Width="35" Height="35" 
+                                Background="#4d4d4d">
                                 <Image Source="/Icons/music_note_icon.png" Height="20" Width="20"/>
                             </Border>
-
-                            <StackPanel Orientation="Vertical" Margin="0">
+                            <StackPanel 
+                                Orientation="Vertical" 
+                                Margin="0">
                                 <Label Content="{Binding Name}"
                                        Foreground="{TemplateBinding Foreground}"
                                        FontSize="15"
@@ -38,5 +35,11 @@
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
+        <Style.Triggers>
+            <Trigger Property="IsSelected" Value="True">
+                <Setter Property="Background" Value="#181818"/>
+                <Setter Property="Foreground" Value="#8d32c2"/>
+            </Trigger>
+        </Style.Triggers>
     </Style>
 </ResourceDictionary>
