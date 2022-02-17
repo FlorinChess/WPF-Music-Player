@@ -166,22 +166,22 @@
                 </custom:HamburgerMenu.Resources>
                 <custom:HamburgerMenu.Content>
                     <StackPanel Margin="0 4">
-                        <custom:HamburgerMenuItem>
+                        <custom:HamburgerMenuItem Command="{Binding NavigateToPlaylistCollection}">
                             <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
                                 <Image 
-                                            Source="/Icons/baseline_home_white_24dp.png"
-                                            Height="40" Width="40" Margin="2 0"/>
+                                    Source="/Icons/baseline_home_white_24dp.png"
+                                    Height="40" Width="40" Margin="2 0"/>
                                 <TextBlock 
-                                            Text="Home"/>
+                                    Text="Home"/>
                             </StackPanel>
                         </custom:HamburgerMenuItem>
-                        <custom:HamburgerMenuItem>
+                        <custom:HamburgerMenuItem Command="{Binding NavigateToSettings}">
                             <StackPanel Orientation="Horizontal">
                                 <Image 
-                                            Source="/Icons/baseline_settings_white_24dp.png"
-                                            Height="40" Width="40" Margin="2 0"/>
+                                    Source="/Icons/baseline_settings_white_24dp.png"
+                                    Height="40" Width="40" Margin="2 0"/>
                                 <TextBlock
-                                            Text="Settings"/>
+                                    Text="Settings"/>
                             </StackPanel>
                         </custom:HamburgerMenuItem>
                         <custom:HamburgerMenuItem  Command="{Binding NavigateToPlaylist}">
