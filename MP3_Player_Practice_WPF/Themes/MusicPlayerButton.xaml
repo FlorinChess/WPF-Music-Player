@@ -3,6 +3,8 @@
     <Style x:Key="MusicPlayerButtonImage" TargetType="Image">
         <Setter Property="Width" Value="50"/>
         <Setter Property="Height" Value="50"/>
+        <Setter Property="Cursor" Value="Hand"/>
+        <Setter Property="Opacity" Value="0.5"/>
         <Setter Property="RenderOptions.BitmapScalingMode" Value="Fant"/>
     </Style>
 
@@ -10,7 +12,6 @@
         <Setter Property="Width" Value="52"/>
         <Setter Property="Height" Value="52"/>
         <Setter Property="Background" Value="Transparent"/>
-        <Setter Property="Foreground" Value="WhiteSmoke"/>
         <Setter Property="HorizontalContentAlignment" Value="Center"/>
         <Setter Property="VerticalContentAlignment" Value="Center"/>
         <Setter Property="BorderThickness" Value="0"/>
